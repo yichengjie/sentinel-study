@@ -30,9 +30,9 @@ public class TestController {
 
 
     @GetMapping("/exception")
-    public RestResponse<String> exception(){
+    public Object exception(){
         String url = "http://hello-nacos-client/hello/exception" ;
-        RestResponse<String> retValue = restTemplate.getForObject(url, RestResponse.class);
+        Object retValue = restTemplate.getForObject(url, Object.class);
         log.info("ret value : {}", retValue);
         return retValue ;
     }

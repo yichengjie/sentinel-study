@@ -14,7 +14,7 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8739
-# feign开启sentinel保护配置
-feign:
+# resttemplate开启sentinel保护配置
+resttemplate:
   sentinel:
     enabled: true
