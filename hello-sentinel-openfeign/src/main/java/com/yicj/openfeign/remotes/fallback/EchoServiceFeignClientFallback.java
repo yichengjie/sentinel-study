@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * @author: yicj
  * @date: 2023/9/16 11:19
  */
-@Component
 public class EchoServiceFeignClientFallback implements EchoServiceFeignClient {
 
     @Override
