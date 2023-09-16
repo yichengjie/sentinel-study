@@ -1,7 +1,6 @@
 package com.yicj.openfeign.remotes.fallback;
 
 import com.yicj.openfeign.remotes.client.EchoServiceFeignClient;
-import org.springframework.stereotype.Component;
 
 /**
  * @author: yicj

@@ -1,8 +1,8 @@
 server:
-  port: 8084
+  port: 8085
 spring:
   application:
-    name: hello-sentinel-feign
+    name: hello-sentinel-resttemplate
   cloud:
     nacos:
       discovery:
@@ -13,4 +13,8 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8858
-        port: 8729
+        port: 8739
+# feign开启sentinel保护配置
+feign:
+  sentinel:
+    enabled: true

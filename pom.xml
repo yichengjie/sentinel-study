@@ -12,6 +12,8 @@
         <module>hello-nacos-client</module>
         <module>hello-sentinel-client</module>
         <module>hello-sentinel-openfeign</module>
+        <module>hello-common</module>
+        <module>hello-sentinel-resttemplate</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -46,6 +48,12 @@
                 <version>${spring-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.83</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

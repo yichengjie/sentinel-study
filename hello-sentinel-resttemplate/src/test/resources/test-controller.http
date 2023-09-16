@@ -1,0 +1,5 @@
+### 正常请求测试
+GET http://localhost:8085/test/index
+
+### 异常请求测试
+GET http://localhost:8085/test/exception
