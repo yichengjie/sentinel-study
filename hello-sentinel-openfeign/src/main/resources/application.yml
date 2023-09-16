@@ -1,0 +1,16 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: hello-sentinel-feign
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    loadbalancer:
+      nacos:
+        enabled: true
+# feign开启sentinel保护配置
+feign:
+  sentinel:
+    enabled: true

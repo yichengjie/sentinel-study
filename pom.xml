@@ -11,6 +11,7 @@
         <module>hello-sentinel-gateway</module>
         <module>hello-nacos-client</module>
         <module>hello-sentinel-client</module>
+        <module>hello-sentinel-openfeign</module>
     </modules>
     <packaging>pom</packaging>
 
