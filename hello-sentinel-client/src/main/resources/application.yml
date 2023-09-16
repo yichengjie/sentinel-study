@@ -1,0 +1,16 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: hello-sentinel-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    loadbalancer:
+      nacos:
+        enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+        port: 8719

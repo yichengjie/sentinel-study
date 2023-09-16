@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>hello-sentinel-gateway</module>
+        <module>hello-nacos-client</module>
+        <module>hello-sentinel-client</module>
     </modules>
     <packaging>pom</packaging>
 
