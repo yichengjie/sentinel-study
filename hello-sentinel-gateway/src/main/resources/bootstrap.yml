@@ -11,6 +11,8 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8749
+      filter:
+        enabled: false
 management:
   endpoints:
     web:
