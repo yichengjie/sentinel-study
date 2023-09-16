@@ -10,6 +10,10 @@ spring:
     loadbalancer:
       nacos:
         enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+        port: 8729
 # feign开启sentinel保护配置
 feign:
   sentinel:
