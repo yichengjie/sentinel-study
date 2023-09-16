@@ -28,11 +28,10 @@ public class TestController {
         return retValue ;
     }
 
-
     @GetMapping("/exception")
     public Object exception(){
         String url = "http://hello-nacos-client/hello/exception" ;
-        Object retValue = restTemplate.getForObject(url, Object.class);
+        RestResponse<String> retValue = restTemplate.getForObject(url, RestResponse.class);
         log.info("ret value : {}", retValue);
         return retValue ;
     }
