@@ -1,0 +1,5 @@
+### 测试index正常方法
+GET http://localhost:8080/hello-nacos/hello/index
+
+### 测试excepton异常方法
+GET http://localhost:8080/hello-nacos/hello/exception

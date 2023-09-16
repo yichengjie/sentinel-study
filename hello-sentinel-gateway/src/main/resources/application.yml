@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        - id: hello-nacos-client
+          uri: lb://hello-nacos-client
+          predicates:
+            - Path=/hello-nacos/**
+          filters:
+            - StripPrefix=1
+
