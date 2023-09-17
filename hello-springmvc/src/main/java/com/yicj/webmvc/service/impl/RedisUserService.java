@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  * @date: 2023/9/17 10:15
  */
 @Service
-@HelloAnnotation
 public class RedisUserService implements UserService {
     @Override
     public String hello() {

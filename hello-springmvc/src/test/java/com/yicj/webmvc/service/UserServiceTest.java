@@ -5,6 +5,7 @@ import com.yicj.webmvc.anno.HelloAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +18,9 @@ import java.util.List;
 @SpringBootTest(classes = WebMvcApplication.class)
 public class UserServiceTest {
 
-    @HelloAnnotation
+    //@HelloAnnotation
     @Autowired
+    @Qualifier
     private List<UserService> userServices = Collections.emptyList() ;
 
     @Test
@@ -29,4 +31,6 @@ public class UserServiceTest {
             log.info("======> ret value : {}", retValue);
         });
     }
+
+
 }
