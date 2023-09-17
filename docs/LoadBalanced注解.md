@@ -1,0 +1,1 @@
+1. @LoadBalanced注解上标注的有@Qualifier注解，当使用@Autowired注入属性时候可以有筛选的功能

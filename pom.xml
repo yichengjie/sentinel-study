@@ -14,6 +14,7 @@
         <module>hello-sentinel-openfeign</module>
         <module>hello-common</module>
         <module>hello-sentinel-resttemplate</module>
+        <module>hello-springmvc</module>
     </modules>
     <packaging>pom</packaging>
 
