@@ -1,2 +1,8 @@
 server:
   port: 8081
+custom:
+  users:
+    - zhangsan=BJS
+    - lisi=SHA
+    - name: 王五
+      address: PEK
