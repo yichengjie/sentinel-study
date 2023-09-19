@@ -21,7 +21,6 @@ public class AsyncServiceTest {
 
     @Autowired
     private IAsyncService asyncService ;
-
     @Test
     public void asyncImportGet() throws Exception {
         String taskId = CommonUtil.uuid();
@@ -58,14 +57,5 @@ public class AsyncServiceTest {
         asyncService.asyncImportVoid(list, taskId);
         Thread.sleep(4000);
     }
-
-
-    @Test
-    public void asyncError() throws Exception {
-        asyncService.asyncError("aaa", "bbb");
-        Thread.sleep(1000);
-    }
-
-
 
 }

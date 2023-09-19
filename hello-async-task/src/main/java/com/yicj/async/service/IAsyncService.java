@@ -2,6 +2,7 @@ package com.yicj.async.service;
 
 import org.springframework.util.concurrent.ListenableFuture;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * @author yicj
@@ -9,9 +10,7 @@ import java.util.List;
  */
 public interface IAsyncService {
 
-    ListenableFuture<String> asyncImport(List<String> list, String taskId) ;
+    Future<String> asyncImport(List<String> list, String taskId) ;
 
     void asyncImportVoid(List<String> list, String taskId) ;
-
-    void asyncError(String a, String b) ;
 }
