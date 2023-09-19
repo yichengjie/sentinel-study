@@ -5,7 +5,6 @@ package com.yicj.async.config;
  * @date 2023年09月19日 11:16
  */
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
@@ -45,6 +43,10 @@ public class AsyncConfig implements AsyncConfigurer {
         return threadPool;
     }
 
+    /**
+     * 1. 当方法返回Future<T>，手动调用feature.get则不会回调handleUncaughtException方法
+     * 2. 当方法返回Future<T>时，如果不调用手动调用feature.get则异常无法正常抛出
+     */
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new CustomAsyncUncaughtExceptionHandler();
@@ -54,7 +56,6 @@ public class AsyncConfig implements AsyncConfigurer {
      * 自定义异步异常处理器
      */
     static class CustomAsyncUncaughtExceptionHandler implements AsyncUncaughtExceptionHandler {
-
         @Override
         public void handleUncaughtException(Throwable ex, Method method, Object... params) {
             //此demo只打印日志，实际项目以具体业务需求来处理

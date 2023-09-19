@@ -10,4 +10,8 @@ import java.util.List;
 public interface IAsyncService {
 
     ListenableFuture<String> asyncImport(List<String> list, String taskId) ;
+
+    void asyncImportVoid(List<String> list, String taskId) ;
+
+    void asyncError(String a, String b) ;
 }

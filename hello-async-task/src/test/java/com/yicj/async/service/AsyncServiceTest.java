@@ -23,7 +23,7 @@ public class AsyncServiceTest {
     private IAsyncService asyncService ;
 
     @Test
-    public void asyncImport() throws Exception {
+    public void asyncImportGet() throws Exception {
         String taskId = CommonUtil.uuid();
         AtomicInteger count = new AtomicInteger() ;
         List<String> list = Stream.generate(count::getAndIncrement)
@@ -34,16 +34,38 @@ public class AsyncServiceTest {
         log.info("ret value : {}", result.get());
     }
 
+    @Test
+    public void asyncImport() throws Exception {
+        String taskId = CommonUtil.uuid();
+        AtomicInteger count = new AtomicInteger() ;
+        List<String> list = Stream.generate(count::getAndIncrement)
+                .limit(5)
+                .map(String::valueOf)
+                .toList();
+        Future<String> result = asyncService.asyncImport(list, taskId);
+        Thread.sleep(4000);
+    }
+
 
     @Test
-    public void asyncImportException() throws Exception {
+    public void asyncImportVoid() throws Exception {
         String taskId = CommonUtil.uuid();
         AtomicInteger count = new AtomicInteger() ;
         List<String> list = Stream.generate(count::getAndIncrement)
                 .limit(11)
                 .map(String::valueOf)
                 .toList();
-        Future<String> result = asyncService.asyncImport(list, taskId);
-        log.info("ret value : {}", result.get());
+        asyncService.asyncImportVoid(list, taskId);
+        Thread.sleep(4000);
     }
+
+
+    @Test
+    public void asyncError() throws Exception {
+        asyncService.asyncError("aaa", "bbb");
+        Thread.sleep(1000);
+    }
+
+
+
 }
