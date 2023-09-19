@@ -20,11 +20,12 @@ import java.util.concurrent.Future;
 public class AsyncServiceImpl implements IAsyncService {
 
     @Override
-    @Async
+    @Async("getAsyncExecutor")
     public ListenableFuture<String> asyncImport(List<String> list, String taskId) {
         log.info("异步导入工作进行中, 请耐性等待...");
         if (list.size() > 10){
-            throw new RuntimeException("任务条数太大，请传入合适的任务条数!") ;
+            //throw new RuntimeException("任务条数太大，请传入合适的任务条数!") ;
+            int i = 1 / 0;
         }
         CommonUtil.sleepQuiet(3000);
         String uuid = CommonUtil.uuid();

@@ -8,11 +8,14 @@ package com.yicj.async.config;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -25,6 +28,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
 
+    @Bean
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
@@ -43,10 +47,20 @@ public class AsyncConfig implements AsyncConfigurer {
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return (ex, method, params) -> {
-            log.error("async task execute fail : " , ex);
-            log.info("method name : {}, params: {}", method.getName(), JSON.toJSONString(params));
-            // 发送邮件通知或则计入数据库
-        };
+        return new CustomAsyncUncaughtExceptionHandler();
+    }
+
+    /**
+     * 自定义异步异常处理器
+     */
+    static class CustomAsyncUncaughtExceptionHandler implements AsyncUncaughtExceptionHandler {
+
+        @Override
+        public void handleUncaughtException(Throwable ex, Method method, Object... params) {
+            //此demo只打印日志，实际项目以具体业务需求来处理
+            log.error(">>> CustomAsyncUncaughtExceptionHandler,class:{}, method: {}, params: {}, error: {}",
+                    method.getDeclaringClass().getSimpleName(), method.getName(), Arrays.toString(params),
+                    ex.getMessage());
+        }
     }
 }

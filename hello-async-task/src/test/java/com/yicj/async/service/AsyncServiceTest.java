@@ -33,4 +33,17 @@ public class AsyncServiceTest {
         Future<String> result = asyncService.asyncImport(list, taskId);
         log.info("ret value : {}", result.get());
     }
+
+
+    @Test
+    public void asyncImportException() throws Exception {
+        String taskId = CommonUtil.uuid();
+        AtomicInteger count = new AtomicInteger() ;
+        List<String> list = Stream.generate(count::getAndIncrement)
+                .limit(11)
+                .map(String::valueOf)
+                .toList();
+        Future<String> result = asyncService.asyncImport(list, taskId);
+        log.info("ret value : {}", result.get());
+    }
 }
