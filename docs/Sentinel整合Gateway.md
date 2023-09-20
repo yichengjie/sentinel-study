@@ -1,4 +1,5 @@
-1. pom引入依赖
+#### Gateway 项目配置
+2. pom引入依赖
     ```text
     <dependency>
        <groupId>com.alibaba.cloud</groupId>
@@ -100,8 +101,12 @@
     spring.cloud.gateway.routes[0].filters[0]=StripPrefix=1
     ```
 6. 浏览器访问：http://localhost:8080/hello-nacos/hello/index
-
-### 启动dashboard上查看不到网关服务 (使用spring-cloud-alibaba-sentinel-gateway启动则csp.sentinel.app.type=1非必须)
+#### Dashboard 启动
+1. 执行启动命令
+   ```text
+   java -Dcsp.sentinel.app.type=1 -Dcsp.sentinel.dashboard.server=localhost:8858 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.6.jar
+   ```
+#### 启动dashboard上查看不到网关服务 (使用spring-cloud-alibaba-sentinel-gateway启动则csp.sentinel.app.type=1非必须)
 1. 方式一：添加vm启动参数 
    ```
    -Dcsp.sentinel.app.type=1 
