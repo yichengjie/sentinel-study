@@ -45,6 +45,6 @@
     spring.cloud.gateway.routes[0].id=hello-nacos-client
     spring.cloud.gateway.routes[0].uri=lb://hello-nacos-client
     spring.cloud.gateway.routes[0].predicates[0]=Path=/hello-nacos/**
-     spring.cloud.gateway.routes[0].filters[0]=StripPrefix=1
+    spring.cloud.gateway.routes[0].filters[0]=StripPrefix=1
     ```
 5. 浏览器访问：http://localhost:8080/hello-nacos/hello/index

@@ -1,0 +1,5 @@
+### 新增用户
+GET http://localhost:8080/hello-nacos/user/add
+
+### 删除用户
+GET http://localhost:8080/hello-nacos/user/delete
