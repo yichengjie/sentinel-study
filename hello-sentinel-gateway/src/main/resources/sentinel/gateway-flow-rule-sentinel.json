@@ -1,0 +1,16 @@
+[
+  {
+    "resource": "hello_nacos_client_1",
+    "grade": 1,
+    "resourceMode": 1,
+    "intervalSec": 2,
+    "count": 1
+  },
+  {
+     "resource": "hello_nacos_client_2",
+     "grade": 1,
+     "resourceMode": 1,
+     "intervalSec": 10,
+     "count": 2
+   }
+]

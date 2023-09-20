@@ -1,0 +1,22 @@
+[
+  {
+    "apiName": "hello_nacos_client_1",
+    "predicateItems":[
+        {
+            "pattern": "/hello-nacos/hello/index"
+        }
+    ]
+  },
+  {
+      "apiName": "hello_nacos_client_2",
+      "predicateItems":[
+          {
+              "pattern": "/hello-nacos/user/add"
+          },
+          {
+             "pattern": "/hello-nacos/user/*",
+             "matchStrategy": 1
+          }
+      ]
+    }
+]

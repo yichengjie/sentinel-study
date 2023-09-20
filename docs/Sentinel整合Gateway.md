@@ -1,5 +1,5 @@
-#### Gateway 项目配置
-2. pom引入依赖
+#### 硬编码方式配置限流规则
+1. pom引入依赖
     ```text
     <dependency>
        <groupId>com.alibaba.cloud</groupId>
@@ -101,6 +101,87 @@
     spring.cloud.gateway.routes[0].filters[0]=StripPrefix=1
     ```
 6. 浏览器访问：http://localhost:8080/hello-nacos/hello/index
+#### JSON文件配置限流规则
+1. 在【硬编码方式配置限流规则】的基础上去除FlowRuleConfig配置
+2. application.properties中添加配置
+   ```properties
+   # 配置限流规则    
+   spring.cloud.sentinel.datasource.ds1.file.file=classpath:sentinel/gateway-flow-rule-sentinel.json
+   spring.cloud.sentinel.datasource.ds1.file.dataType=json  
+   spring.cloud.sentinel.datasource.ds1.file.rule-type=gw-flow
+   # 配置API分组
+   spring.cloud.sentinel.datasource.ds2.file.file=classpath:sentinel/gateway-flow-api-group-sentinel.json
+   spring.cloud.sentinel.datasource.ds2.file.dataType=json  
+   spring.cloud.sentinel.datasource.ds2.file.rule-type=gw-api-group
+   ```
+3. 在resources目录下新建目录sentinel
+4. 在resource/sentinel目录中新建gateway-flow-rule-sentinel.json
+   ```json
+   [
+     {
+       "resource": "hello_nacos_client_1",
+       "grade": 1,
+       "resourceMode": 1,
+       "intervalSec": 2,
+       "count": 1
+     },
+     {
+        "resource": "hello_nacos_client_2",
+        "grade": 1,
+        "resourceMode": 1,
+        "intervalSec": 10,
+        "count": 2
+      }
+   ]
+   ```
+5. 在resource/sentinel目录中新建gateway-flow-api-group-sentinel.json
+   ```json
+   [
+     {
+       "apiName": "hello_nacos_client_1",
+       "predicateItems":[
+           {
+               "pattern": "/hello-nacos/hello/index"
+           }
+       ]
+     },
+     {
+         "apiName": "hello_nacos_client_2",
+         "predicateItems":[
+             {
+                 "pattern": "/hello-nacos/user/add"
+             },
+             {
+                "pattern": "/hello-nacos/user/*",
+                "matchStrategy": 1
+             }
+         ]
+       }
+   ]
+   ```
+#### Nacos文件配置限流规则
+1. 在【硬编码方式配置限流规则】的基础上去除FlowRuleConfig配置
+2. pom添加依赖
+   ```xml
+   <dependency>
+      <groupId>com.alibaba.csp</groupId>
+      <artifactId>sentinel-datasource-nacos</artifactId>
+   </dependency>
+   ```
+3. application.properties中添加配置
+   ```properties
+   # 配置限流规则    
+   spring.cloud.sentinel.datasource.ds1.nacos.dataId=gateway-flow-rule-sentinel.json
+   spring.cloud.sentinel.datasource.ds1.nacos.groupId=DEFAULT_GROUP
+   spring.cloud.sentinel.datasource.ds1.nacos.dataType=json
+   spring.cloud.sentinel.datasource.ds1.nacos.rule-type=gw-flow
+   # 配置API分组
+   spring.cloud.sentinel.datasource.ds2.nacos.dataId=gateway-flow-api-group-sentinel.json
+   spring.cloud.sentinel.datasource.ds2.nacos.groupId=DEFAULT_GROUP
+   spring.cloud.sentinel.datasource.ds2.nacos.dataType=json
+   spring.cloud.sentinel.datasource.ds2.nacos.rule-type=gw-api-group
+   ```
+4. 在nacos控制台上新建gateway-flow-rule-sentinel.json与gateway-flow-api-group-sentinel.json文件并填充JSON内容
 #### Dashboard 启动
 1. 执行启动命令
    ```text

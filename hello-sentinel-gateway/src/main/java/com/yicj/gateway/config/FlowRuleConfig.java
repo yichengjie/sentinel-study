@@ -18,7 +18,7 @@ import java.util.Set;
  * @date 2023年09月20日 9:32
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class FlowRuleConfig {
 
     @PostConstruct

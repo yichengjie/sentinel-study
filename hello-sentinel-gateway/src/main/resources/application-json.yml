@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    sentinel:
+      datasource:
+        # json 配置文件配置
+        ds1:
+          file:
+            file: classpath:sentinel/gateway-flow-rule-sentinel.json
+            dataType: json
+            rule-type: gw-flow
+        ds2:
+          file:
+            file: classpath:sentinel/gateway-flow-api-group-sentinel.json
+            dataType: json
+            rule-type: gw-api-group

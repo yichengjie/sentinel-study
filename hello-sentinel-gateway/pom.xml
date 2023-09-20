@@ -30,18 +30,14 @@
         <dependency>
               <groupId>com.alibaba.cloud</groupId>
               <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
-         </dependency>
-
-       <!-- <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-transport-simple-http</artifactId>
-        </dependency>-->
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
 
+        <!-- 通过nacos持久化流控规则 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>

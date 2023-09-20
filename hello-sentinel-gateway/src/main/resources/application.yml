@@ -14,6 +14,10 @@ spring:
             - Path=/hello-nacos/**
           filters:
             - StripPrefix=1
-#logging:
-#  level:
-#    root: debug
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+        port: 8720
+      filter:
+        enabled: false
+      eager: true

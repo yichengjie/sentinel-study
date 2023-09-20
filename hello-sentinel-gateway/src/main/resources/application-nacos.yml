@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    sentinel:
+      datasource:
+        # json 配置文件配置
+        ds1:
+          nacos:
+            data-id: gateway-flow-rule-sentinel.json
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: gw-flow
+        ds2:
+          nacos:
+            data-id: gateway-flow-api-group-sentinel.json
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: gw-api-group
