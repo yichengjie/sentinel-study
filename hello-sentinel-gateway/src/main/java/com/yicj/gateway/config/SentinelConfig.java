@@ -30,7 +30,7 @@ import java.util.Set;
  * @author yicj
  * @date 2023年09月13日 12:58
  */
-@Configuration
+//@Configuration
 public class SentinelConfig {
 
     @PostConstruct
