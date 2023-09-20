@@ -25,10 +25,9 @@ public class FlowRuleConfig {
     public void init(){
         // 加载限流分组规则
         this.initCustomizeRule();
-        // 加载限流分组Api
+        // 加载限流分组Api// 这个加载会报错
         this.initCustomizedApis();
     }
-
 
     /**
      * 加载限流规则
@@ -42,20 +41,21 @@ public class FlowRuleConfig {
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS) ;
         rule.setIntervalSec(60) ;
         rule.setCount(4) ;
-        //list.add(rule) ;
+        list.add(rule) ;
 
         //2. 按照api分组限流(针对api)
         GatewayFlowRule rule1 = new GatewayFlowRule("hello_nacos_client_1") ;
-        // 这里不能配置，否则dashboard上网关服务不正常
-        //rule1.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME) ;
-        //rule1.setGrade(RuleConstant.FLOW_GRADE_QPS) ;
-        rule1.setIntervalSec(10) ;
+        // setResourceMode、setGrade 可以不设置
+        rule1.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME) ;
+        rule1.setGrade(RuleConstant.FLOW_GRADE_QPS) ;
+        rule1.setIntervalSec(2) ;
         rule1.setCount(1) ;
         list.add(rule1) ;
         //
         GatewayFlowRule rule2 = new GatewayFlowRule("hello_nacos_client_2") ;
-        //rule2.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME) ;
-        //rule2.setGrade(RuleConstant.FLOW_GRADE_QPS) ;
+        // setResourceMode、setGrade 可以不设置
+        rule2.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME) ;
+        rule2.setGrade(RuleConstant.FLOW_GRADE_QPS) ;
         rule2.setIntervalSec(10) ;
         rule2.setCount(2) ;
         list.add(rule2) ;
@@ -63,19 +63,17 @@ public class FlowRuleConfig {
         GatewayRuleManager.loadRules(list) ;
     }
 
-
-
     private void initCustomizedApis() {
         Set<ApiDefinition> definitions = new HashSet<>();
         ApiDefinition api1 = new ApiDefinition("hello_nacos_client_1")
                 .setPredicateItems(new HashSet<>() {{
                     add(new ApiPathPredicateItem().setPattern("/hello-nacos/hello/index"));
-                    add(new ApiPathPredicateItem().setPattern("/hello-nacos/user/**")
-                            .setMatchStrategy(SentinelGatewayConstants.PARAM_MATCH_STRATEGY_PREFIX));
                 }});
         ApiDefinition api2 = new ApiDefinition("hello_nacos_client_2")
                 .setPredicateItems(new HashSet<>() {{
                     add(new ApiPathPredicateItem().setPattern("/hello-nacos/user/add"));
+                    add(new ApiPathPredicateItem().setPattern("/hello-nacos/user/**")
+                            .setMatchStrategy(SentinelGatewayConstants.PARAM_MATCH_STRATEGY_PREFIX));
                 }});
         definitions.add(api1);
         definitions.add(api2);

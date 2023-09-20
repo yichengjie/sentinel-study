@@ -9,8 +9,8 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8720
-#      filter:
-#        enabled: false
+      filter:
+        enabled: false
       eager: true
 management:
   endpoints:
