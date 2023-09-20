@@ -33,47 +33,26 @@ import java.util.Set;
 //@Configuration
 public class SentinelConfig {
 
-    @PostConstruct
-    public void init(){
-        this.initCustomizeRule();
+    private final List<ViewResolver> viewResolvers;
+    private final ServerCodecConfigurer serverCodecConfigurer;
+
+    public SentinelConfig(ObjectProvider<List<ViewResolver>> viewResolversProvider,
+                                ServerCodecConfigurer serverCodecConfigurer) {
+        this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
+        this.serverCodecConfigurer = serverCodecConfigurer;
     }
 
-    private void initCustomizeRule(){
-        Set<GatewayFlowRule> list = new HashSet<>() ;
-        GatewayFlowRule rule = new GatewayFlowRule("hello-nacos-client") ;
-        rule.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_ROUTE_ID) ;
-        // qps: 1
-        rule.setGrade(1) ;
-        rule.setCount(1) ;
-        rule.setIntervalSec(1) ;
-        rule.setControlBehavior(1) ;
-        list.add(rule) ;
-        GatewayRuleManager.loadRules(list) ;
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
+        // Register the block exception handler for Spring Cloud Gateway.
+        return new SentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
     }
 
-//    public final List<ViewResolver> viewResolvers ;
-//    private final ServerCodecConfigurer serverCodecConfigurer;
-//
-//
-//    public SentinelConfig(
-//            ObjectProvider<List<ViewResolver>> viewResolversProvider,
-//            ServerCodecConfigurer serverCodecConfigurer) {
-//        this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
-//        this.serverCodecConfigurer = serverCodecConfigurer;
-//    }
-//
-//
-//    @Bean
-//    @Order(Ordered.HIGHEST_PRECEDENCE)
-//    public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
-//        // Register the block exception handler for Spring Cloud Gateway.
-//        return new SentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
-//    }
-//
-//    @Bean
-//    @Order(-1)
-//    public GlobalFilter sentinelGatewayFilter() {
-//        return new SentinelGatewayFilter();
-//    }
+    @Bean
+    @Order(-1)
+    public GlobalFilter sentinelGatewayFilter() {
+        return new SentinelGatewayFilter();
+    }
 
 }

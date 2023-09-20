@@ -3,15 +3,12 @@ package com.yicj.gateway.config;
 import com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiDefinition;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiPathPredicateItem;
-import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiPredicateItem;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.GatewayApiDefinitionManager;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule;
-import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayParamFlowItem;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayRuleManager;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
-
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +26,7 @@ public class FlowRuleConfig {
         // 加载限流分组规则
         this.initCustomizeRule();
         // 加载限流分组Api
-        //this.initCustomizedApis2();
+        //this.initCustomizedApis();
     }
 
 
@@ -68,7 +65,7 @@ public class FlowRuleConfig {
 
 
 
-    private void initCustomizedApis2() {
+    private void initCustomizedApis() {
         Set<ApiDefinition> definitions = new HashSet<>();
         ApiDefinition api1 = new ApiDefinition("hello_nacos_client_1")
                 .setPredicateItems(new HashSet<>() {{
