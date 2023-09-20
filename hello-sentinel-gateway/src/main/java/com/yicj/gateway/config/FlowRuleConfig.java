@@ -26,7 +26,7 @@ public class FlowRuleConfig {
         // 加载限流分组规则
         this.initCustomizeRule();
         // 加载限流分组Api
-        //this.initCustomizedApis();
+        this.initCustomizedApis();
     }
 
 
@@ -42,7 +42,7 @@ public class FlowRuleConfig {
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS) ;
         rule.setIntervalSec(60) ;
         rule.setCount(4) ;
-        list.add(rule) ;
+        //list.add(rule) ;
 
         //2. 按照api分组限流(针对api)
         GatewayFlowRule rule1 = new GatewayFlowRule("hello_nacos_client_1") ;
