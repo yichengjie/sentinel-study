@@ -30,6 +30,7 @@ import java.util.Set;
  * @author yicj
  * @date 2023年09月13日 12:58
  */
+// 项目引入spring-cloud-alibaba-sentinel-gateway后不需要要一下配置
 //@Configuration
 public class SentinelConfig {
 
