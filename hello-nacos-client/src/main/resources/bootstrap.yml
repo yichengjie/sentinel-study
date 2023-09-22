@@ -4,3 +4,6 @@ spring:
       config:
         server-addr: localhost:8848
         #namespace:  默认public
+book:
+  category: sprin cloud
+  author: jin

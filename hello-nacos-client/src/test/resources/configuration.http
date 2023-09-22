@@ -1,0 +1,5 @@
+### 获取配置
+GET http://localhost:8082/config/config
+
+### 刷新配置
+GET http://localhost:8082/config/event

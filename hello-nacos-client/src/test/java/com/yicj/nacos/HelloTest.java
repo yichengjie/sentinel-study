@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import java.io.IOException;
+
 
 /**
  * @author: yicj
@@ -20,7 +22,7 @@ public class HelloTest {
     private NacosConfigManager configManager ;
 
     @Test
-    public void hello() throws NacosException {
+    public void hello() throws NacosException, IOException {
         ConfigService configService = configManager.getConfigService();
         String dataId = "gateway-flow-api-group-sentinel.json" ;
         String groupId = "DEFAULT_GROUP" ;
