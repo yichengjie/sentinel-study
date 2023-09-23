@@ -1,5 +1,7 @@
 package com.yicj.sentinel.controller;
 
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/index")
-    public String hello(){
+    public String hello() throws BlockException {
+
+        SphU.entry("test");
 
         return "hello index" ;
     }
