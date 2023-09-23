@@ -24,7 +24,7 @@ public class RuleLoadInitFunc implements InitFunc {
         log.info("======> 手动加载限流规则.....");
         initFlowRule();
         //
-        //this.initDegradeRule();
+        this.initDegradeRule();
     }
 
     /**

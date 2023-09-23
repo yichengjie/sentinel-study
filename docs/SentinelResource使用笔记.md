@@ -42,8 +42,10 @@
    
        @GetMapping(value = "/exception")
        @SentinelResource(value = "test_exception", fallback = "fallbackHello")
-       public String exception() {
-           int i = 1/0 ;
+       public String exception(@RequestParam(value = "param", required = false) String param) {
+           if (StringUtils.hasText(param)){
+              int i = 1/0 ;
+           }
            return "Hello Sentinel";
        }
        public String fallbackHello(Throwable e){
@@ -52,7 +54,35 @@
        }
    }
    ```
-2. 访问```http://localhost:8083/test/exception```
+2. 访问```http://localhost:8083/test/exception?param=1```
+#### 熔断配置
+1. 在FlowRuleInitFunc中补充熔断配置
+   ```java
+   @Slf4j
+   public class RuleLoadInitFunc implements InitFunc {
+       @Override
+       public void init() throws Exception {
+           log.info("======> 手动加载限流规则.....");
+           this.initDegradeRule();
+       }
+       /**
+        * 30秒内，最少3个请求，如果有10% 的报错则触发10秒的熔断降级
+        */
+       private void initDegradeRule(){
+           List<DegradeRule> rules = new ArrayList<>() ;
+           DegradeRule rule = new DegradeRule("test_exception")
+               .setGrade(CircuitBreakerStrategy.ERROR_RATIO.getType())
+               .setCount(0.1) // Threshold is 70% error ratio
+               .setMinRequestAmount(3) // 熔断触发的最小请求数
+               .setStatIntervalMs(30000) // 30s 统计时长
+               .setTimeWindow(10); // 熔断时长10秒
+           rules.add(rule) ;
+           DegradeRuleManager.loadRules(rules);
+       }
+   }
+   ```
+2. 访问3次```http://localhost:8083/test/exception?param=1``` 
+3. 再次访问```http://localhost:8083/test/exception```发现服务已经处于熔断状态，10秒之后服务恢复正常
 #### 其他补充
 1. blockHandlerHello中的异常参数类型为BlockException，写成Exception则不生效
 2. fallbackHello中的异常参数必须是Throwable, 写成别的不生效
