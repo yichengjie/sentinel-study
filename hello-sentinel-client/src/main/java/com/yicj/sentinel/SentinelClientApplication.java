@@ -21,7 +21,7 @@ public class SentinelClientApplication {
     }
 
     @RestController
-    public class EchoController {
+    static public class EchoController {
         @GetMapping(value = "/echo/{string}")
         public String echo(@PathVariable String string) {
             return "Hello Nacos Discovery " + string;

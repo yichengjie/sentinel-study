@@ -1,5 +1,8 @@
 package com.yicj.resttemplate.controller;
 
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.alibaba.fastjson.TypeReference;
 import com.yicj.common.model.vo.RestResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -43,5 +50,26 @@ public class TestController {
         RestResponse<String> retValue = exchange.getBody();
         log.info("ret value : {}", retValue);
         return retValue ;
+    }
+
+    @PostConstruct
+    public void init(){
+
+        //this.initDegradeRule();
+    }
+
+    /**
+     * 配置服务的熔断规则
+     */
+    private void initDegradeRule(){
+        List<DegradeRule> rules = new ArrayList<>() ;
+        DegradeRule rule = new DegradeRule() ;
+        rule.setResource("KEY");
+        rule.setCount(2) ;
+        rule.setGrade(RuleConstant.DEGRADE_GRADE_EXCEPTION_COUNT) ;
+        rule.setTimeWindow(10) ;
+        rule.setMinRequestAmount(3) ;
+        rules.add(rule) ;
+        DegradeRuleManager.loadRules(rules);
     }
 }
