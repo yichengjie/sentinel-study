@@ -1,0 +1,10 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: sentinel-nacos-datasource
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8858
+        port: 8779
