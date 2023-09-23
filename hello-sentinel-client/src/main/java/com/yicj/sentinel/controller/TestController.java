@@ -29,6 +29,12 @@ public class TestController {
         }
         return "Hello Sentinel";
     }
+    
+    @GetMapping("/block")
+    public String block(){
+        
+        return "Hello Sentinel" ;
+    }
 
     public String blockHandlerHello(BlockException e){
         log.error("被限流了异常打印：", e);
