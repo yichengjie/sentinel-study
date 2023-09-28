@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
  * @date: 2023/9/17 10:30
  */
 @Service
-//@HelloAnnotation
-@Qualifier
+@HelloAnnotation
+//@Qualifier
 public class MysqlUserService implements UserService {
     @Override
     public String hello() {

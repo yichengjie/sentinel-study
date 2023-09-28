@@ -14,3 +14,9 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8719
+# actuator config
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
