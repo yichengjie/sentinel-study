@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @author: yicj
- * @date: 2023/9/16 10:05
+ * @author  yicj
+ * @date  2023/9/16 10:05
  */
 @Slf4j
 @EnableDiscoveryClient

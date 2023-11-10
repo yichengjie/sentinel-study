@@ -14,3 +14,7 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8729
+      datasource:
+feign:
+  sentinel:
+    enabled: true

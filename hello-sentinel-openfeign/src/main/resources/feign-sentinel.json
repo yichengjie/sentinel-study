@@ -1,0 +1,9 @@
+[{
+  "resource": "GET:http://service-provider/echo/{str}",
+  "grade": 0,
+  "count": 201,
+  "timeWindow": 11,
+  "minRequestAmount": 6,
+  "statIntervalMs": 1000,
+  "slowRatio":0.3
+}]
