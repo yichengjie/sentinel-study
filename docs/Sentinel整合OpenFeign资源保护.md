@@ -6,11 +6,17 @@
         <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
     </dependency>
     ```
-2. yml添加配置
-    ```yaml
-    feign:
-      sentinel:
-        enabled: true
+2. 添加配置
+    ```properties
+    # 1. sentinel保护feign开关
+    feign.sentinel.enabled=true
+    # 2. sentinel dashboard 配置
+    spring.cloud.sentinel.transport.dashboard=localhost:8858
+    spring.cloud.sentinel.transport.port=8729
+    # 3. 基础配置
+    spring.application.name=hello-sentinel-feign
+    spring.cloud.nacos.discovery.server-addr=localhost:8848
+    spring.cloud.loadbalancer.nacos.enabled=true
     ```
 3. 编写feign接口并配置fallback属性
     ```java
