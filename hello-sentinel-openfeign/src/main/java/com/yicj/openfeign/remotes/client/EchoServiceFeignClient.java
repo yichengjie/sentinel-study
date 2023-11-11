@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Qualifier("echoServiceFeignClient")
 @FeignClient(name = "hello-service-provider",
-    fallback = EchoServiceFeignClientFallback.class,
-    configuration = FeignConfiguration.class
-)
+    fallback = EchoServiceFeignClientFallback.class)
 public interface EchoServiceFeignClient {
 
     @GetMapping(value = "/echo/dynamic/{str}")
