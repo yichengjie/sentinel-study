@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @author yicj
  * @date 2023年09月18日 10:18
  */
-public class HttpUtil {
+public class OkHttpUtil {
 
     public static final MediaType JSON = MediaType.parse("application/json");
 

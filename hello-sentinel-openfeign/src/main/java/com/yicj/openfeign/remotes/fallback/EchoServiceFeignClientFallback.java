@@ -7,9 +7,14 @@ import com.yicj.openfeign.remotes.client.EchoServiceFeignClient;
  * @date: 2023/9/16 11:19
  */
 public class EchoServiceFeignClientFallback implements EchoServiceFeignClient {
+    @Override
+    public String dynamic(String str) {
+        return "dynaic echo fallback " + str;
+    }
 
     @Override
-    public String echo(String str) {
-        return "echo fallback";
+    public String fixed() {
+        return "echo fixed fallback !";
     }
+
 }

@@ -1,1 +1,4 @@
-GET http://localhost:8084/echo/2
+GET http://localhost:8084/echo/dynamc/2
+###
+
+GET http://localhost:8084/echo/fixed/hello

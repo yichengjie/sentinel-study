@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @date: 2023/9/16 11:18
  */
 @Qualifier("echoServiceFeignClient")
-@FeignClient(name = "service-provider",
+@FeignClient(name = "hello-service-provider",
     fallback = EchoServiceFeignClientFallback.class,
     configuration = FeignConfiguration.class
 )
 public interface EchoServiceFeignClient {
 
-    @GetMapping(value = "/echo/{str}")
-    String echo(@PathVariable("str") String str);
+    @GetMapping(value = "/echo/dynamic/{str}")
+    String dynamic(@PathVariable("str") String str);
+
+    @GetMapping(value = "/echo/fixed/hello")
+    String fixed();
 }

@@ -40,9 +40,14 @@ public class SentinelFeignApplication {
         private EchoServiceFeignClient feignClient ;
 
 
-        @GetMapping("/echo/{value}")
+        @GetMapping("/echo/dynamic/{value}")
         public String echo(@PathVariable String value){
-            return feignClient.echo(value) ;
+            return feignClient.dynamic(value) ;
+        }
+
+        @GetMapping("/echo/fixed/hello")
+        public String echo(){
+            return feignClient.fixed() ;
         }
     }
 }

@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    sentinel:
+      datasource:
+        # json 配置文件配置
+        ds1:
+          file:
+            file: classpath:sentinel/feign-degrade-sentinel.json
+            dataType: json
+            rule-type: degrade
+feign:
+  sentinel:
+    enabled: true

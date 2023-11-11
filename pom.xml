@@ -17,6 +17,7 @@
         <module>hello-springmvc</module>
         <module>hello-async-task</module>
         <module>sentinel-nacos-datasource</module>
+        <module>hello-service-provider</module>
     </modules>
     <packaging>pom</packaging>
 

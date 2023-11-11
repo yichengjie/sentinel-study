@@ -1,0 +1,17 @@
+[{
+  "resource": "GET:http://service-provider/echo/dynamic/{str}",
+  "grade": 0,
+  "count": 201,
+  "timeWindow": 11,
+  "minRequestAmount": 6,
+  "statIntervalMs": 10000,
+  "slowRatio":0.3
+},{
+    "resource": "GET:http://service-provider/echo/fixed/hello",
+    "grade": 0,
+    "count": 201,
+    "timeWindow": 11,
+    "minRequestAmount": 6,
+    "statIntervalMs": 10000,
+    "slowRatio":0.3
+}]
